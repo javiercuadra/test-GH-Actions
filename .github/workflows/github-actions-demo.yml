@@ -16,3 +16,16 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+  Test-New-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js '16.13.0'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.13.0'
+          cache: 'yarn'
+      - run: yarn --frozen-lockfile
+      - run: yarn run build
+      - run: yarn run test
